@@ -1,0 +1,43 @@
+class MinStack {
+    int min = Integer.MAX_VALUE;
+    Stack<Integer> stack = new Stack<Integer>();
+    public void push(int x) {
+        if(x <= min){          
+            stack.push(min);
+            min=x;
+        }
+        stack.push(x);
+    }
+    public void pop() {
+        if(stack.pop() == min) min=stack.pop();
+    }
+    public int top() {
+        return stack.peek();
+    }
+    public int getMin() {
+        return min;
+    }
+}
+
+
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k = k%n;
+
+        rev(nums,0,n-1);
+        rev(nums,0,k-1);
+        rev(nums,k,n-1);
+    }
+    public void rev(int[] a, int l, int r)
+    {
+        while(l<r)
+        {
+            int temp = a[l];
+            a[l] = a[r];
+            a[r] = temp;
+            l++;
+            r--;
+        }
+    }
+}
